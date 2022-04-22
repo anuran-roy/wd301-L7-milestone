@@ -2,16 +2,16 @@ import logo from "../logo.svg";
 import { ActiveLink, navigate } from "raviger";
 import { User } from "../types/userTypes";
 
-export default function Header(props: { currentUser: User, title: string }) {
+export default function Header(props: { currentUser: User; title: string }) {
   console.log("currentUser to Header = " + props.currentUser);
   const links = [
     { key: 1, page: "Home", url: "/" },
     { key: 2, page: "About", url: "/about" },
     { key: 3, page: "Form", url: "/form" },
     { key: 4, page: "Preview", url: "/preview" },
-    (
-      props.currentUser ? { key: 5, page: "Logout", url: "/logout" }: { key: 5, page: "Login", url: "/login" }
-    ),
+    props.currentUser
+      ? { key: 5, page: "Logout", url: "/logout" }
+      : { key: 5, page: "Login", url: "/login" },
   ];
   return (
     <>
@@ -35,17 +35,19 @@ export default function Header(props: { currentUser: User, title: string }) {
             >
               {link.page}
             </ActiveLink>
-          ) : link.url === "/logout"? 
-          (<button
-            key={link.key}
-            className="text-sky-500 shadow-lg hover:text-white font-bold hover:bg-sky-500 px-3 py-1 my-5 rounded-3xl"
-            onClick={(_) => {
-              localStorage.removeItem("token");
-              // window.location.reload();
-              navigate("/login");
-            }}
-          >Logout
-          </button>) : (
+          ) : link.url === "/logout" ? (
+            <button
+              key={link.key}
+              className="my-5 rounded-3xl px-3 py-1 font-bold text-sky-500 shadow-lg hover:bg-sky-500 hover:text-white"
+              onClick={(_) => {
+                localStorage.removeItem("token");
+                // window.location.reload();
+                navigate("/login");
+              }}
+            >
+              Logout
+            </button>
+          ) : (
             <ActiveLink
               // className="my-5 rounded-3xl px-3 py-1 shadow-lg hover:bg-sky-500 hover:text-white"
               key={link.key}

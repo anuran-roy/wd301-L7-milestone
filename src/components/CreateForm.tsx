@@ -39,13 +39,16 @@ export default function CreateForm(props: {
 
   useEffect(() => {
     // props.saveForm(currentForm);
-    saveFormItems([...getFormItems().filter(formItem => formItem.id !== currentForm.id), currentForm]);
+    saveFormItems([
+      ...getFormItems().filter((formItem) => formItem.id !== currentForm.id),
+      currentForm,
+    ]);
     // navigate(`/form/${currentForm.id}`);
   }, [formSaved === true]);
 
   const discardPreview = () => {
     setFormSaved(false);
-    saveFormItems(getFormItems().filter(form => form.id !== currentForm.id));
+    saveFormItems(getFormItems().filter((form) => form.id !== currentForm.id));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -56,7 +59,7 @@ export default function CreateForm(props: {
       try {
         const data = await createForm(currentForm);
         navigate(`/form/${data.id}`);
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
     }
@@ -64,7 +67,7 @@ export default function CreateForm(props: {
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-    {/* <Header title="Home" /> */}
+      {/* <Header title="Home" /> */}
       <input
         type="text"
         className="my-2 h-14 w-96 flex-1 items-center border-0 p-2 text-center text-4xl hover:border-b-2 hover:border-b-sky-500 focus:border-b-2 focus:border-b-sky-500 focus:outline-none focus:ring-0"
@@ -102,23 +105,25 @@ export default function CreateForm(props: {
       <button
         // onClick={saveCurrentForm}
         type="submit"
-        className="btn btn-primary bg-green-500 p-2 font-bold text-white rounded-md m-3"
+        className="btn btn-primary m-3 rounded-md bg-green-500 p-2 font-bold text-white"
       >
         Save
       </button>
       <button
         onClick={(_) => navigate("/")}
-        className="btn btn-primary bg-blue-500 p-2 font-bold text-white rounded-md m-3"
+        className="btn btn-primary m-3 rounded-md bg-blue-500 p-2 font-bold text-white"
       >
         Close
       </button>
       <button
-        className="btn btn-primary bg-orange-500 p-2 font-bold text-white rounded-md m-3"
+        className="btn btn-primary m-3 rounded-md bg-orange-500 p-2 font-bold text-white"
         onClick={(_) => {
           discardPreview();
           navigate("/");
         }}
-        >Discard</button>
+      >
+        Discard
+      </button>
     </form>
   );
 }

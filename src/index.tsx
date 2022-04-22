@@ -4,8 +4,7 @@ import "./index.css";
 import AppRouter from "./router/AppRouter";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 ReactDOM.render(
   <React.StrictMode>

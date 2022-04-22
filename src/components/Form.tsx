@@ -79,7 +79,9 @@ export default function Form(props: { formId: number }) {
   };
 
   const [formState, setFormState] = useState(() => initialFormState());
-  const [formItemState, setFormItemState] = useState<formItemType>(() => initialFormItemsState());
+  const [formItemState, setFormItemState] = useState<formItemType>(() =>
+    initialFormItemsState()
+  );
   const [newField, dispatchNewFieldAction] = useReducer(newFieldReducer, "");
 
   const initialAutoSaveState: () => boolean = () => {
@@ -136,10 +138,9 @@ export default function Form(props: { formId: number }) {
 
   const switchPublic = () => {
     if (formItemState.is_public === true) {
-      setFormItemState({...formItemState, is_public: false});
+      setFormItemState({ ...formItemState, is_public: false });
     } else {
-      setFormItemState({...formItemState, is_public: true});
-
+      setFormItemState({ ...formItemState, is_public: true });
     }
   };
 
@@ -290,7 +291,7 @@ export default function Form(props: { formId: number }) {
           hash: Number(new Date()),
           title: action.title,
         };
-        case "update_description":
+      case "update_description":
         return {
           ...state,
           hash: Number(new Date()),
@@ -400,12 +401,12 @@ export default function Form(props: { formId: number }) {
           hash: Number(new Date()),
           title: action.title,
         };
-        case "update_description":
-          return {
-            ...state,
-            hash: Number(new Date()),
-            description: action.description,
-          };
+      case "update_description":
+        return {
+          ...state,
+          hash: Number(new Date()),
+          description: action.description,
+        };
       case "add_option":
         return {
           ...state,
@@ -502,7 +503,7 @@ export default function Form(props: { formId: number }) {
       try {
         const data = await createForm(formItemState);
         navigate(`/form/${data.id}`);
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
     }
@@ -518,7 +519,7 @@ export default function Form(props: { formId: number }) {
               type="text"
               className="my-2 h-14 w-14 flex-1 items-center border-0 p-2 text-center text-4xl hover:border-b-2 hover:border-b-sky-500 focus:border-b-2 focus:border-b-sky-500 focus:outline-none focus:ring-0"
               // value={formState.title}
-              value={formItemState.title ? formItemState.title: ""}
+              value={formItemState.title ? formItemState.title : ""}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 dispatchItemAction({
                   type: "update_title",
@@ -536,7 +537,7 @@ export default function Form(props: { formId: number }) {
               type="text"
               className="my-2 h-14 w-14 flex-1 items-center border-0 p-2 text-center text-lg hover:border-b-2 hover:border-b-sky-500 focus:border-b-2 focus:border-b-sky-500 focus:outline-none focus:ring-0"
               // value={formState.title}
-              value={formItemState.description ? formItemState.description: ""}
+              value={formItemState.description ? formItemState.description : ""}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 dispatchItemAction({
                   type: "update_description",

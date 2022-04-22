@@ -11,20 +11,18 @@ const getCurrentUser = async (setCurrentUser: (currentUser: User) => void) => {
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 function App() {
   const [currentUser, setCurrentUser] = useState<User>(null);
   useEffect(() => {
     getCurrentUser(setCurrentUser);
-  }, [])
+  }, []);
 
-  console.log("From app.tsx")
+  console.log("From app.tsx");
   console.log(currentUser);
 
-  return (
-    <AppRouter currentUser={currentUser} />
-  );
+  return <AppRouter currentUser={currentUser} />;
 }
 
 export default App;
