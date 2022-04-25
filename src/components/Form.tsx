@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Form(props: {formId: number}) {
     const [formState, setFormState] = useState<formMetaType>({
-        id: 0,
+        id: props.formId,
         title: "",
     });
     const [formFieldsState, setFormFieldsState] = useState<formFieldType[]>([]);

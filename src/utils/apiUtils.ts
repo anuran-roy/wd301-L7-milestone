@@ -3,7 +3,7 @@ import { formFieldMetaType, formFieldType, formItemType, formMetaType } from "..
 
 export type RequestType = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
 
-const API_BASE_URL: string = "https://tsapi.gigin.dev/api/";
+const API_BASE_URL: string = "https://tsapi.coronasafe.live/api/";
 
 export const request = async (
   endpoint: string,
