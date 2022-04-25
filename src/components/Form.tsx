@@ -6,6 +6,8 @@ import LabelText from './Labels/LabelText';
 import LabelTextarea from './Labels/LabelTextarea';
 import { formFieldMetaType, formFieldType, formItemType, formMetaType } from '../types/formTypes';
 import { addFormField, fetchFormData, fetchFormFieldsData, request } from '../utils/apiUtils';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Form(props: {formId: number}) {
     const [formState, setFormState] = useState<formMetaType>({
@@ -109,12 +111,14 @@ export default function Form(props: {formId: number}) {
     }
 
     useEffect(() => {
+        toast("Form Page Loaded!");
         fetchFormData(setFormState, props.formId);
         fetchFormFieldsData(setFormFieldsState, props.formId);
     }, []);
 
 
     return <>
+    <ToastContainer />
     {
         formFieldsState.map(field => renderField(field))
     }
