@@ -19,9 +19,38 @@ export default function Form(props: {formId: number}) {
     const addField = () => {
         let data: formFieldMetaType;
         switch(fieldType) {
-            case "Text":
+            case "TEXT":
                 data = {
-                    kind: "text",
+                    kind: "TEXT",
+                    label: newField,
+                    // fieldType: "text",
+                    value: "",
+                };
+                addFormField(formState, data);
+                break;
+            
+            case "RADIO":
+                data = {
+                    kind: "RADIO",
+                    label: newField,
+                    // fieldType: "text",
+                    value: "",
+                };
+                addFormField(formState, data);
+                break;
+            
+            case "DROPDOWN":
+                data = {
+                    kind: "DROPDOWN",
+                    label: newField,
+                    // fieldType: "text",
+                    value: "",
+                };
+                addFormField(formState, data);
+                break;
+            default:
+                data = {
+                    kind: "TEXT",
                     label: newField,
                     // fieldType: "text",
                     value: "",
@@ -32,6 +61,52 @@ export default function Form(props: {formId: number}) {
         // window.location.reload();
     }
 
+    const removeField = (id: number) => {
+        setFormFieldsState(
+            formFieldsState.filter((field) => {
+            return field.id !== id;
+          }),
+        );
+
+        request(`forms/${props.formId}/fields/${id}`, "DELETE", {});
+      };
+    
+    const updateLabel = (label_value: string, id: number) => {
+        setFormFieldsState(
+            formFieldsState.map((field) => {
+            if (field.id === id) {
+              return {
+                ...field,
+                label: label_value,
+              };
+            }
+    
+            return field;
+          }),
+        );
+      };
+    
+    const renderField = (field: formFieldType) => {
+        switch(field.kind) {
+            case "TEXT":
+                return (<LabelText
+                    id={field.id}
+                    label={field.label}
+                    fieldType="text"
+                    value={field.value}
+                    removeLabelCB={removeField}
+                    updateLabelCB={updateLabel}
+                    />);
+                // break;
+            // case "dropdown":
+            //     return ();
+            //     break;
+            // case "radio":
+            //     return ();
+            default:
+                return (<></>);
+        }
+    }
 
     useEffect(() => {
         fetchFormData(setFormState, props.formId);
@@ -41,7 +116,7 @@ export default function Form(props: {formId: number}) {
 
     return <>
     {
-        formFieldsState.map(field => <div>{JSON.stringify(field)}</div>)
+        formFieldsState.map(field => renderField(field))
     }
     <div>
         Add Field: 
@@ -53,11 +128,11 @@ export default function Form(props: {formId: number}) {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewField(e.target.value)}
         />
 
-        <select id="fieldOptions" className="mx-2 rounded-md p-3" defaultValue="TEXT">
-            <option onClick={(_) => setFieldType("TEXT")}value="Text">Text</option>
-            <option onClick={(_) => setFieldType("DROPDOWN")}value="Dropdown">Dropdown</option>
-            <option onClick={(_) => setFieldType("RADIO")}value="Radio">Radio</option>
-            <option onClick={(_) => setFieldType("GENERIC")}value="Generic">Generic</option>
+        <select id="fieldOptions" className="mx-2 rounded-md p-3" defaultValue={fieldType}>
+            <option onClick={(_) => setFieldType("TEXT")} value="TEXT">Text</option>
+            <option onClick={(_) => setFieldType("DROPDOWN")} value="DROPDOWN">Dropdown</option>
+            <option onClick={(_) => setFieldType("RADIO")} value="RADIO">Radio</option>
+            <option onClick={(_) => setFieldType("GENERIC")} value="GENERIC">Generic</option>
         </select>
         <button
         className="rounded-md px-3 bg-sky-500 text-white font-bold"

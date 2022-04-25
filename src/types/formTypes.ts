@@ -11,7 +11,7 @@ export type textFieldTypes =
 
 export type TextField = {
   id: number;
-  kind: "text";
+  kind: "TEXT";
   label: string;
   fieldType: string;
   value: string;
@@ -19,7 +19,7 @@ export type TextField = {
 
 export type DropdownField = {
   id: number;
-  kind: "dropdown";
+  kind: "DROPDOWN";
   label: string;
   options: string[];
   value: string;
@@ -27,7 +27,7 @@ export type DropdownField = {
 
 export type RadioField = {
   id: number;
-  kind: "radio";
+  kind: "RADIO";
   label: string;
   options: string[];
   value: string;

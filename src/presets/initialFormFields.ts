@@ -1,19 +1,19 @@
 import { formFieldType } from "../types/formTypes";
 
 const initialFormFields: formFieldType[] = [
-  { kind: "text", id: 1, label: "First Name", fieldType: "text", value: "" },
-  { kind: "text", id: 2, label: "Last Name", fieldType: "text", value: "" },
+  { kind: "TEXT", id: 1, label: "First Name", fieldType: "text", value: "" },
+  { kind: "TEXT", id: 2, label: "Last Name", fieldType: "text", value: "" },
   // { kind: "text", id: 3, label: "Email", fieldType: "email", value: "" },
   {
-    kind: "dropdown",
+    kind: "DROPDOWN",
     id: 3,
     label: "Email",
     options: ["gmail", "hotmail"],
     value: "",
   },
-  { kind: "text", id: 4, label: "Date of Birth", fieldType: "date", value: "" },
+  { kind: "TEXT", id: 4, label: "Date of Birth", fieldType: "date", value: "" },
   {
-    kind: "radio",
+    kind: "RADIO",
     id: 5,
     label: "Gender",
     options: ["Male(M)", "Female(F)", "Other(X)"],

@@ -106,7 +106,7 @@ export default function Preview(props: { formId: number }) {
         return {
           ...state,
           formFields: state.formFields.map((field) => {
-            if (field.id !== updateAction.id || field.kind !== "text") {
+            if (field.id !== updateAction.id || field.kind !== "TEXT") {
               return field;
             } else {
               return {
@@ -136,7 +136,7 @@ export default function Preview(props: { formId: number }) {
           formFields: state.formFields.map((field) => {
             if (
               field.id !== updateAction.id ||
-              (field.kind !== "dropdown" && field.kind !== "radio")
+              (field.kind !== "DROPDOWN" && field.kind !== "RADIO")
             ) {
               return field;
             } else {
@@ -174,7 +174,7 @@ export default function Preview(props: { formId: number }) {
 
   const renderField = (field: formFieldType) => {
     switch (field.kind) {
-      case "text":
+      case "TEXT":
         return (
           <TextFieldInput
             id={field.id}
@@ -194,7 +194,7 @@ export default function Preview(props: { formId: number }) {
             }
           />
         );
-      case "dropdown":
+      case "DROPDOWN":
         return (
           <DropdownFieldInput
             id={field.id}
@@ -210,7 +210,7 @@ export default function Preview(props: { formId: number }) {
             }}
           />
         );
-      case "radio":
+      case "RADIO":
         return (
           <div>
             <RadioFieldInput
