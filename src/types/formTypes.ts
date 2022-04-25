@@ -54,6 +54,8 @@ export type formFieldType =
   | MultiselectField
   | TextareaField;
 
+export type formFieldMetaType = Omit<formFieldType, "id">;
+
 export type fieldKind =
   | "text"
   | "dropdown"
@@ -66,6 +68,11 @@ export interface formDataType {
   id: number;
   hash: number;
   title: string;
+  description?: string;
+  is_public?: boolean;
+  created_by?: number;
+  created_date?: string;
+  modified_date?: string;
   formFields: formFieldType[];
 }
 
@@ -80,7 +87,18 @@ export type formItemType = {
   created_by?: number;
   created_date?: string;
   modified_date?: string;
-  formFields?: formFieldType[];
+  formFields: formFieldType[];
+};
+
+export type formMetaType = {
+  id: number;
+  title: string;
+  hash?: number;
+  description?: string;
+  is_public?: boolean;
+  created_by?: number;
+  created_date?: string;
+  modified_date?: string;
 };
 
 export type errorType<T> = Partial<Record<keyof T, string>>;

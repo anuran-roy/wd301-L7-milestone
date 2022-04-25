@@ -11,7 +11,6 @@ import initialFormFields from "../presets/initialFormFields";
 import Header from "./Header";
 
 import Modal from "./common/Modal";
-import CreateForm from "./CreateForm";
 import AppContainer from "./AppContainer";
 import { deleteFormAPI, listForms, me } from "../utils/apiUtils";
 import { Pagination } from "../types/common";
@@ -31,7 +30,7 @@ export default function Home() {
     try {
       const data: Pagination<formItemType> = await listForms({
         offset: offset,
-        limit: 5,
+        limit: limit,
       });
       // const jsonData: formItemType[] = data.json();
       setFormItemCB(data.results);
@@ -88,7 +87,7 @@ export default function Home() {
       hash: Number(new Date()),
       id: Number(new Date()),
       title: "Untitled Form",
-      // formFields: initialFormFields,
+      formFields: initialFormFields,
     };
     // <Redirect to={`/form/${createdForm.id}`} />
 

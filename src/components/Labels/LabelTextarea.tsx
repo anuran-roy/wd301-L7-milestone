@@ -1,4 +1,4 @@
-export function LabelTextarea(props: {
+export default function LabelTextarea(props: {
   id: number;
   label: string;
   value: string;

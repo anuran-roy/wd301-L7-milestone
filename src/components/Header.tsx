@@ -9,7 +9,7 @@ export default function Header(props: { currentUser: User; title: string }) {
     { key: 2, page: "About", url: "/about" },
     { key: 3, page: "Form", url: "/form" },
     { key: 4, page: "Preview", url: "/preview" },
-    props.currentUser
+    localStorage.getItem("token") !== null 
       ? { key: 5, page: "Logout", url: "/logout" }
       : { key: 5, page: "Login", url: "/login" },
   ];

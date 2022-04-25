@@ -15,6 +15,9 @@ const Home = React.lazy(() => import("../components/Home"));
 export default function AppRouter(props: { currentUser: User }) {
   const [state, setState] = useState("HOME");
 
+  console.log("CurrentUser at AppRouter = ");
+  console.table(props.currentUser);
+  // console.table(JSON.parse(props.currentUser).username !== null);
   const openForm = () => {
     setState("FORM");
   };

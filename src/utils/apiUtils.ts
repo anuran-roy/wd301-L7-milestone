@@ -1,5 +1,5 @@
-import { PaginationParams } from "../types/common";
-import { formItemType } from "../types/formTypes";
+import { Pagination, PaginationParams } from "../types/common";
+import { formFieldMetaType, formFieldType, formItemType, formMetaType } from "../types/formTypes";
 
 export type RequestType = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
 
@@ -52,19 +52,6 @@ export const request = async (
   }
 };
 
-export const createForm = (formItem: formItemType) => {
-  console.log(formItem);
-  return request("forms/", "POST", formItem);
-};
-
-export const deleteFormAPI = (formId: number) => {
-  return request(`forms/${formId}/`, "DELETE", {});
-};
-
-export const editFormAPI = (formId: number) => {
-  return request(`forms/${formId}/`, "DELETE", {});
-};
-
 export const login = async (username: string, password: string) => {
   // console.log(username, password);
   return request("auth-token/", "POST", { username, password });
@@ -78,3 +65,74 @@ export const me = async () => {
 export const listForms = (pageParams: PaginationParams) => {
   return request("forms/", "GET", pageParams);
 };
+
+export const getFormFields = (id: number) => {
+  return request(`forms/${id}/fields/`, "GET", {});
+}
+
+export const getForm = (id: number) => {
+  return request(`forms/${id}/`, "GET", {});
+} 
+
+export const createFormAPI = (formItem: formItemType) => {
+  console.log(formItem);
+  return request("forms/", "POST", formItem);
+};
+
+export const deleteFormAPI = (formId: number) => {
+  return request(`forms/${formId}/`, "DELETE", {});
+};
+
+export const editFormAPI = (form: formItemType) => {
+  return request(`forms/${form.id}/`, "PUT", form);
+};
+
+export const updateFormField = (form: formMetaType, field: formFieldType) => {
+  return request(`forms/${form.id}/fields/${field.id}`, "PUT", field);
+}
+
+export const addFormField = (form: formMetaType, field: formFieldMetaType) => {
+  return request(`forms/${form.id}/fields/`, "POST", field);
+}
+
+export const deleteFormField = (form: formMetaType, field: formFieldType) => {
+  return request(`forms/${form.id}/fields/${field.id}`, "PUT", field);
+}
+
+export const listFormFields = (
+  pageParams: PaginationParams = { offset: 0, limit: 3 },
+  id: number,
+) => {
+  return request(`forms/${id}/fields/`, "GET", {});
+};
+
+
+export const fetchFormFieldsData = async (
+  setFieldsCB: (fields_to_set: formFieldType[]) => void, id: number
+) => {
+  try {
+    const data: Pagination<formFieldType> = await listFormFields({
+      offset: 0,
+      limit: 5,
+    }, id);
+    // const jsonData: formItemType[] = data.json();
+    setFieldsCB(data.results);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchFormData = (setFormStateCB: (formState: formItemType) => void, formId: number) => {
+  // const localForms = getForms();
+
+  // if (localForms.length > 0) {
+  //   return localForms.filter((form) => form.id === props.formId)[0];
+
+  getForm(formId).then(response => {
+    console.log("From form.fetchFormData()");
+    console.table(response);
+    return response;
+  });
+};
+
+// export const saveFormAPI = 

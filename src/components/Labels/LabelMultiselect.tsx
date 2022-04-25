@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { formDataType } from "../../types/formTypes";
 
-export function LabelMultiselect(props: {
+export default function LabelMultiselect(props: {
   id: number;
   label: string;
   options: string[];

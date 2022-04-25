@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { formDataType } from "../../types/formTypes";
 
-export function LabelRadio(props: {
+export default function LabelRadio(props: {
   id: number;
   // kind: "radio",
   parent_id: number;

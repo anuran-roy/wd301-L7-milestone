@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { formDataType } from "../../types/formTypes";
 
-export function LabelSelect(props: {
+export default function LabelSelect(props: {
   id: number;
   // kind: "dropdown",
   parent_id: number;

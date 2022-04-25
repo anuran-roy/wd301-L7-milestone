@@ -6,7 +6,8 @@ import { navigate } from "raviger";
 import Modal from "./common/Modal";
 import Header from "./Header";
 import AppContainer from "./AppContainer";
-import { createForm } from "../utils/apiUtils";
+import { createFormAPI } from "../utils/apiUtils";
+import initialFormFields from "../presets/initialFormFields";
 export default function CreateForm(props: {
   // open: boolean;
   // closeCB: () => void;
@@ -21,7 +22,7 @@ export default function CreateForm(props: {
       id: Number(new Date()),
       title: "Untitled Form",
       description: "Random description",
-      // formFields: initialFormFields,
+      formFields: initialFormFields,
     };
     // setListState([...listState, createdForm]);
     // saveFormItems([...listState, createdForm]);
@@ -57,7 +58,7 @@ export default function CreateForm(props: {
 
     if (Object.keys(errors).length === 0) {
       try {
-        const data = await createForm(currentForm);
+        const data = await createFormAPI(currentForm);
         navigate(`/form/${data.id}`);
       } catch (error) {
         console.log(error);

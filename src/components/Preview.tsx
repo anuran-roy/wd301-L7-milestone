@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import AppContainer from "./AppContainer";
-import Header from "./Header";
 import { navigate, Redirect } from "raviger";
+import formDataType from "../types/formDataType";
 import responseDataType from "../types/responseDataType";
-import { getForms, getFormItems } from "../functions/getForms";
+import { getForms } from "../functions/getForms";
 import getResponses from "../functions/getResponses";
 import saveResponses from "../functions/saveResponses";
 import {
@@ -14,11 +13,7 @@ import {
   MultiselectFieldInput,
 } from "./Preview/PreviewInput";
 
-import {
-  formFieldType,
-  formDataType,
-  updatePreviewAction,
-} from "../types/formTypes";
+import { formFieldType, updatePreviewAction } from "../types/formTypes";
 
 export default function Preview(props: { formId: number }) {
   const getForm: () => formDataType = () => {
@@ -277,7 +272,6 @@ export default function Preview(props: { formId: number }) {
     emptyForm()
   ) : (
     <>
-      {/* <Header title=""></Header> */}
       <p className="flex justify-center py-5 text-3xl">{responseState.title}</p>
       <p className="my-5">
         <i>Last modified on:</i> {responseState.last_modified}
@@ -285,48 +279,48 @@ export default function Preview(props: { formId: number }) {
       <p>Question {question + 1}</p>
       {renderField(responseState.formFields[question])}
       <div className="flex justify-center">
-        <button
+        <div
           onClick={(_) => {
             gotoPreviousQuestion();
           }}
           className="btn m-2 cursor-pointer rounded-md bg-sky-500 p-2 text-white hover:bg-sky-700"
         >
           &lt; Previous
-        </button>
-        <button
+        </div>
+        <div
           onClick={(_) => {
             gotoNextQuestion();
           }}
           className="btn m-2 cursor-pointer rounded-md bg-sky-500 p-2 text-white hover:bg-sky-700"
         >
           Next &gt;
-        </button>
+        </div>
       </div>
       <div className="flex justify-center">
-        <button
+        <div
           onClick={(_) => {
             gotoFirstQuestion();
           }}
           className="btn m-2 cursor-pointer rounded-md bg-sky-500 p-2 text-white hover:bg-sky-700"
         >
           &lt;&lt; First
-        </button>
-        <button
+        </div>
+        <div
           onClick={(_) => {
             gotoLastQuestion();
           }}
           className="btn m-2 cursor-pointer rounded-md bg-sky-500 p-2 text-white hover:bg-sky-700"
         >
           Last &gt;&gt;
-        </button>
-        <button
+        </div>
+        <div
           onClick={(_) => {
             closePreview();
           }}
           className="btn m-2 cursor-pointer rounded-md bg-sky-500 p-2 text-white hover:bg-sky-700"
         >
           Close Preview
-        </button>
+        </div>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-export function LabelText(props: {
+export default function LabelText(props: {
   id: number;
   label: string;
   fieldType: string;
