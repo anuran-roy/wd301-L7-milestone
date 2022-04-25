@@ -5,6 +5,18 @@ import AppRouter from "./router/AppRouter";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: "https://ef1a456bbfe947bb92346687af8cc498@o1219465.ingest.sentry.io/6361712",
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
   <React.StrictMode>
